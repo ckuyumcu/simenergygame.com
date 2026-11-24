@@ -1165,5 +1165,101 @@ ready(function(){
 });
 })();
 </script>
+<script>
+/* SimEnergy — Skorumu Gec meydan okuma modu v1 */
+(function(){
+function ready(fn){var t=setInterval(function(){if(window.__G&&__G.dmGen&&__G.dmAct&&__G.dmBest&&__G.S){clearInterval(t);fn()}},400)}
+function b64e(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64d(s){try{return JSON.parse(decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/')))))}catch(e){return null}}
+ready(function(){
+ var LG={
+  tr:{ch_t:'Meydan okuma · Günün Piyasası #{n}',ch_inv:'Rakibin bu günde %{x} yaptı. Aynı fiyatlar, aynı güneş, aynı 8 karar. Onu geçebilir misin?',ch_play:'Oyna',ch_close:'Kapat',ch_slot:'{a}:00–{b}:00 · Fiyat {p} · Güneş {s} kWh',ch_soc:'Akü: {k} kWh',ch_c:'Şarj et',ch_s:'Sat',ch_w:'Bekle',ch_you:'Sen',ch_opp:'Rakip',ch_res:'Sonuç',ch_win:'Kazandın! Rakibi geçtin.',ch_lose:'Rakip kazandı. Yarın yeni bir gün var!',ch_tie:'Berabere! İkiniz de %{x} yaptınız.',ch_share:'Bu skorla meydan oku',ch_copied:'Meydan okuma bağlantısı kopyalandı!',ch_bad:'Bu meydan okuma bağlantısı bozuk ya da eski. İstersen bugünün piyasasını oynayabilirsin.',ch_moves:'Hamle hamle',ch_go:'Kariyere dön',ch_make:'Skorumu Geç — arkadaşına meydan oku',ch_nomove:'Bu günlük skor, bağlantı için gerekli hamle kaydı olmadan paylaşılamıyor. Yarınki oyunda hazır olacak.',ch_ev:['Tahmin: sakin bir gün.','Tahmin: akşam zirvesi sert.','Tahmin: öğlen fiyatı düşebilir.','Tahmin: güneş üretimi düşük.','Tahmin: sabah ve akşam çift zirve.'],ch_wait:'Önce kendi turunu bitir — rakibin hamleleri sonra açılır.'},
+  en:{ch_t:'Challenge · Market of the Day #{n}',ch_inv:'Your rival scored {x}% on this day. Same prices, same sun, same 8 decisions. Can you beat it?',ch_play:'Play',ch_close:'Close',ch_slot:'{a}:00–{b}:00 · Price {p} · Solar {s} kWh',ch_soc:'Battery: {k} kWh',ch_c:'Charge',ch_s:'Sell',ch_w:'Wait',ch_you:'You',ch_opp:'Rival',ch_res:'Result',ch_win:'You win! You beat the rival.',ch_lose:'Rival wins. A new day comes tomorrow!',ch_tie:'Tie! You both scored {x}%.',ch_share:'Challenge with this score',ch_copied:'Challenge link copied!',ch_bad:'This challenge link is broken or outdated. You can still play today\'s market.',ch_moves:'Move by move',ch_go:'Back to career',ch_make:'Beat my score — challenge a friend',ch_nomove:'This score cannot be shared yet (move record missing). It will work from tomorrow\'s game.',ch_ev:['Forecast: a calm day.','Forecast: strong evening peak.','Forecast: noon price may dip.','Forecast: low solar output.','Forecast: double peak, morning and evening.'],ch_wait:'Finish your own round first — rival moves unlock after.'},
+  de:{ch_t:'Herausforderung · Markt des Tages #{n}',ch_inv:'Dein Rivale erreichte {x}% an diesem Tag. Gleiche Preise, gleiche Sonne, gleiche 8 Entscheidungen. Schaffst du mehr?',ch_play:'Spielen',ch_close:'Schließen',ch_slot:'{a}:00–{b}:00 · Preis {p} · Solar {s} kWh',ch_soc:'Akku: {k} kWh',ch_c:'Laden',ch_s:'Verkaufen',ch_w:'Warten',ch_you:'Du',ch_opp:'Rivale',ch_res:'Ergebnis',ch_win:'Gewonnen! Du hast den Rivalen geschlagen.',ch_lose:'Der Rivale gewinnt. Morgen kommt ein neuer Tag!',ch_tie:'Unentschieden! Ihr habt beide {x}%.',ch_share:'Mit diesem Score herausfordern',ch_copied:'Challenge-Link kopiert!',ch_bad:'Dieser Challenge-Link ist defekt oder veraltet. Du kannst trotzdem den heutigen Markt spielen.',ch_moves:'Zug für Zug',ch_go:'Zur Karriere',ch_make:'Schlag meinen Score — fordere einen Freund heraus',ch_nomove:'Dieser Score kann noch nicht geteilt werden (Zugprotokoll fehlt). Ab morgen klappt es.',ch_ev:['Prognose: ruhiger Tag.','Prognose: starke Abendspitze.','Prognose: Mittagspreis kann fallen.','Prognose: wenig Solarertrag.','Prognose: Doppelspitze morgens und abends.'],ch_wait:'Beende erst deine Runde — die Rivale-Züge werden danach sichtbar.'},
+  es:{ch_t:'Desafío · Mercado del día #{n}',ch_inv:'Tu rival logró un {x}% en este día. Mismos precios, mismo sol, mismas 8 decisiones. ¿Puedes superarlo?',ch_play:'Jugar',ch_close:'Cerrar',ch_slot:'{a}:00–{b}:00 · Precio {p} · Solar {s} kWh',ch_soc:'Batería: {k} kWh',ch_c:'Cargar',ch_s:'Vender',ch_w:'Esperar',ch_you:'Tú',ch_opp:'Rival',ch_res:'Resultado',ch_win:'¡Ganaste! Superaste al rival.',ch_lose:'Gana el rival. ¡Mañana hay un nuevo día!',ch_tie:'¡Empate! Los dos lograron {x}%.',ch_share:'Desafiar con este resultado',ch_copied:'¡Enlace de desafío copiado!',ch_bad:'Este enlace de desafío está roto o caducado. Puedes jugar el mercado de hoy.',ch_moves:'Movimiento a movimiento',ch_go:'Volver a la carrera',ch_make:'Supera mi marca — desafía a un amigo',ch_nomove:'Este resultado aún no se puede compartir (falta el registro de movimientos). Mañana funcionará.',ch_ev:['Pronóstico: día tranquilo.','Pronóstico: pico fuerte por la tarde.','Pronóstico: el precio del mediodía puede caer.','Pronóstico: poca producción solar.','Pronóstico: doble pico, mañana y tarde.'],ch_wait:'Termina tu ronda primero — los movimientos del rival se mostrarán después.'},
+  ar:{ch_t:'تحدي · سوق اليوم #{n}',ch_inv:'حقق منافسك {x}% في هذا اليوم. نفس الأسعار، نفس الشمس، نفس القرارات الثمانية. هل يمكنك التفوق عليه؟',ch_play:'العب',ch_close:'إغلاق',ch_slot:'{a}:00–{b}:00 · السعر {p} · الشمس {s} kWh',ch_soc:'البطارية: {k} kWh',ch_c:'اشحن',ch_s:'بِع',ch_w:'انتظر',ch_you:'أنت',ch_opp:'المنافس',ch_res:'النتيجة',ch_win:'فزت! تفوقت على المنافس.',ch_lose:'فاز المنافس. غداً يوم جديد!',ch_tie:'تعادل! كلاهما {x}%.',ch_share:'تحدَّ بهذه النتيجة',ch_copied:'تم نسخ رابط التحدي!',ch_bad:'رابط التحدي هذا معطوب أو قديم. يمكنك لعب سوق اليوم.',ch_moves:'نقلة بنقلة',ch_go:'العودة إلى المسيرة',ch_make:'تفوق على نتيجتي — تحدَّ صديقاً',ch_nomove:'لا يمكن مشاركة هذه النتيجة بعد (سجل النقلات مفقود). ستعمل من لعبة الغد.',ch_ev:['التوقع: يوم هادئ.','التوقع: ذروة مسائية قوية.','التوقع: سعر الظهيرة قد ينخفض.','التوقع: إنتاج شمسي منخفض.','التوقع: ذروتان صباحاً ومساءً.'],ch_wait:'أنهِ جولتك أولاً — تظهر نقلات المنافس بعدها.'}
+ };
+ function lang(){var l=(__G.S&&__G.S.lang)||'en';return LG[l]?l:'en'}
+ function tr(k,o){var s=LG[lang()][k];if(typeof s!=='string')return s;if(o)for(var x in o)s=s.split('{'+x+'}').join(o[x]);return s}
+ function pd2(x){return('0'+x).slice(-2)}
+ function fmt(n){return Math.round(n*10)/10}
+ var mvIds=['mv0','mv1','mv2'];
+ document.addEventListener('click',function(e){
+  try{
+   var t=e.target;while(t&&mvIds.indexOf(t.id)<0)t=t.parentElement;
+   if(!t)return;var S=__G.S;if(!S||!S.dm||S.dm.done||S.dm.i<0)return;
+   var c=+t.id.slice(2),n=S.dm.n,all=JSON.parse(localStorage.getItem('se_dmv')||'{}');
+   if(!all[n]||all[n].i!==S.dm.i)all[n]={i:S.dm.i,m:[]};
+   all[n].m.push(c);all[n].i=S.dm.i+1;localStorage.setItem('se_dmv',JSON.stringify(all));
+  }catch(x){}
+ },true);
+ function linkFor(n,moves){return location.origin+location.pathname+'?ch='+b64e({v:1,n:n,m:moves})}
+ function shareLink(url,done){try{if(navigator.share){navigator.share({text:url}).then(done,done);return}}catch(e){}try{navigator.clipboard.writeText(url).then(done,function(){prompt('',url);done()})}catch(e){prompt('',url);done()}}
+ setInterval(function(){
+  try{
+   var S=__G.S,c=document.getElementById('dmc');
+   if(!c||c.hidden||!S||!S.dm||!S.dm.done)return;
+   if(document.getElementById('sechb'))return;
+   var n=S.dm.n,all={};try{all=JSON.parse(localStorage.getItem('se_dmv')||'{}')}catch(e){}
+   var b=document.createElement('button');b.id='sechb';b.textContent=tr('ch_make');b.style.cssText='margin-top:8px;width:100%';
+   b.onclick=function(){
+    var rec=all[n];
+    if(!rec||!rec.m||rec.m.length!==8){alert(tr('ch_nomove'));return}
+    shareLink(linkFor(n,rec.m),function(){var t=document.getElementById('toast');if(t){t.textContent=tr('ch_copied');t.classList.add('on');setTimeout(function(){t.classList.remove('on')},3000)}})
+   };
+   c.appendChild(b);
+  }catch(e){}
+ },1200);
+ var qs=new URLSearchParams(location.search),ch=qs.get('ch');
+ if(!ch)return;
+ try{history.replaceState(null,'',location.pathname)}catch(e){}
+ var data=b64d(ch),bad=false,G=null,opp={g:0,x:0,m:[]};
+ if(!data||data.v!==1||typeof data.n!=='number'||!Array.isArray(data.m)||data.m.length!==8||data.m.some(function(v){return v!==0&&v!==1&&v!==2}))bad=true;
+ if(!bad){
+  try{
+   G=__G.dmGen(data.n);var soc=0,g=0;
+   for(var i=0;i<8;i++){var r=__G.dmAct(G,i,soc,data.m[i]);soc=r[0];g+=r[1]}
+   var o=__G.dmBest(G,0,0);opp={g:g,x:o>1e-9?Math.max(0,Math.min(100,Math.round(g/o*100))):100,m:data.m.slice()};
+  }catch(e){bad=true}
+ }
+ var ov=document.createElement('div');
+ ov.style.cssText='position:fixed;inset:0;background:#0b1220f2;z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto;font-family:inherit;color:#e5e7eb';
+ ov.dir=(lang()==='ar'?'rtl':'ltr');
+ document.body.appendChild(ov);
+ function btn(t,fn,primary){var b=document.createElement('button');b.textContent=t;b.style.cssText='padding:12px 18px;border-radius:12px;border:1px solid #ffffff33;background:'+(primary?'#16a34a':'#1f2937')+';color:#fff;font-size:16px;margin:6px;cursor:pointer';b.onclick=fn;return b}
+ function card(html){ov.innerHTML='';var d=document.createElement('div');d.style.cssText='max-width:420px;width:100%;background:#111c2e;border:1px solid #ffffff22;border-radius:18px;padding:22px;box-shadow:0 20px 60px #000a';d.innerHTML=html;ov.appendChild(d);return d}
+ if(bad){
+  var d0=card('<h2 style="margin:0 0 10px">⚠️</h2><p>'+tr('ch_bad')+'</p>');
+  d0.appendChild(btn(tr('ch_close'),function(){ov.remove()},true));return;
+ }
+ function intro(){
+  var d=card('<div style="font-size:12px;opacity:.7;letter-spacing:.08em">'+tr('ch_t',{n:data.n-20000})+'</div><h2 style="margin:8px 0">⚔️ '+tr('ch_res')+': %'+opp.x+'</h2><p>'+tr('ch_inv',{x:opp.x})+'</p><p style="opacity:.8">'+tr('ch_ev')[G.ev]+'</p><p style="font-size:13px;opacity:.6">'+tr('ch_wait')+'</p>');
+  d.appendChild(btn(tr('ch_play'),function(){play(0,0,0,[])},true));
+  d.appendChild(btn(tr('ch_close'),function(){ov.remove()}));
+ }
+ function play(i,soc,g,mine){
+  if(i>7)return finish(g,mine);
+  var q=G.P[i],s0=G.S[i];
+  var d=card('<div style="font-size:12px;opacity:.7">'+(i+1)+' / 8</div><h3 style="margin:8px 0">'+tr('ch_slot',{a:pd2(i*3),b:pd2(i*3+3),p:q,s:s0})+'</h3><p style="opacity:.85">🔋 '+tr('ch_soc',{k:fmt(soc)})+'</p>');
+  d.appendChild(btn('⚡ '+tr('ch_c'),function(){var r=__G.dmAct(G,i,soc,0);play(i+1,r[0],g+r[1],mine.concat(0))}));
+  var bs=btn('💰 '+tr('ch_s'),function(){var r=__G.dmAct(G,i,soc,1);play(i+1,r[0],g+r[1],mine.concat(1))},true);
+  if(soc<.05){bs.disabled=true;bs.style.opacity=.4}
+  d.appendChild(bs);
+  d.appendChild(btn('⏸ '+tr('ch_w'),function(){var r=__G.dmAct(G,i,soc,2);play(i+1,r[0],g+r[1],mine.concat(2))}));
+ }
+ function finish(g,mine){
+  var o=__G.dmBest(G,0,0),x=o>1e-9?Math.max(0,Math.min(100,Math.round(g/o*100))):100;
+  var msg=x>opp.x?'🏆 '+tr('ch_win'):x<opp.x?'😅 '+tr('ch_lose'):'🤝 '+tr('ch_tie',{x:x});
+  var ic=['⚡','💰','⏸'],rows='';
+  for(var i=0;i<8;i++)rows+='<tr style="border-top:1px solid #ffffff14"><td style="padding:6px">'+pd2(i*3)+'–'+pd2(i*3+3)+'</td><td style="padding:6px">'+G.P[i]+'</td><td style="padding:6px">'+ic[mine[i]]+'</td><td style="padding:6px">'+ic[opp.m[i]]+'</td></tr>';
+  var d=card('<div style="font-size:12px;opacity:.7;letter-spacing:.08em">'+tr('ch_res')+'</div><h2 style="margin:8px 0">'+msg+'</h2><div style="display:flex;justify-content:space-around;margin:10px 0"><div><div style="font-size:26px;font-weight:700;color:#4ade80">%'+x+'</div><div style="font-size:13px;opacity:.75">'+tr('ch_you')+'</div></div><div><div style="font-size:26px;font-weight:700;color:#f87171">%'+opp.x+'</div><div style="font-size:13px;opacity:.75">'+tr('ch_opp')+'</div></div></div><div style="font-size:12px;opacity:.7;margin:6px 0">'+tr('ch_moves')+'</div><table style="width:100%;font-size:14px;border-collapse:collapse"><tr style="opacity:.6;font-size:12px"><td></td><td></td><td>'+tr('ch_you')+'</td><td>'+tr('ch_opp')+'</td></tr>'+rows+'</table>');
+  var sh=btn(tr('ch_share'),function(){shareLink(linkFor(data.n,mine),function(){sh.textContent='✓ '+tr('ch_copied')})},true);
+  d.appendChild(sh);
+  d.appendChild(btn(tr('ch_go'),function(){ov.remove()}));
+ }
+ intro();
+});
+})();
+</script>
 </body>
 </html>
