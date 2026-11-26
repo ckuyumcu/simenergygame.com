@@ -259,3 +259,4 @@ html.play-html{height:100%}
 .spin{width:38px;height:38px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--dusk);animation:sp 1s linear infinite;justify-self:center}
 @keyframes sp{to{transform:rotate(360deg)}}
 .stage-frame{position:absolute;inset:0}
+.foot .foot-co{flex-basis:100%;margin:0}
